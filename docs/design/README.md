@@ -22,7 +22,7 @@
 - **Portrait**: until a photo is uploaded in `/admin` (Profile → Hero → Portrait) the hero shows a monogram.
 
 ## Tokens
-- **Fonts**: Kanit (display headings), Figtree (body), Instrument Serif italic (accent words). Loaded with `next/font` in `src/app/(frontend)/layout.tsx`.
+- **Fonts**: Lexend (body and headings, the owner's choice), Instrument Serif italic (accent words). Loaded with `next/font` in `src/app/(frontend)/layout.tsx`.
 - **Colour**: neutral shadcn tokens in `src/app/(frontend)/globals.css`, light by default with a dark theme. Accent colours used outside the tokens, all taken from the reference: the emerald availability badge and the five project tints (`src/components/projects/tints.ts`).
 - **Shape**: pill buttons (`rounded-full`, set in `src/components/ui/button.tsx`), `rounded-3xl` cards.
 - **Motion**: marquee, rotating badge, sticky card stacking; marquee and badge stop under `prefers-reduced-motion`.

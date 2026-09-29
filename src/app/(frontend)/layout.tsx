@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Figtree, Instrument_Serif, Kanit } from 'next/font/google'
+import { Instrument_Serif, Lexend } from 'next/font/google'
 import React from 'react'
 
 import { SiteFooter } from '@/components/layout/site-footer'
@@ -9,8 +9,7 @@ import { asMedia, getProfile, getSiteSettings } from '@/lib/cms'
 
 import './globals.css'
 
-const figtree = Figtree({ subsets: ['latin'], variable: '--font-figtree' })
-const kanit = Kanit({ subsets: ['latin'], weight: ['400', '500', '600'], variable: '--font-kanit' })
+const lexend = Lexend({ subsets: ['latin'], variable: '--font-lexend' })
 const instrumentSerif = Instrument_Serif({
   subsets: ['latin'],
   weight: '400',
@@ -42,7 +41,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${figtree.variable} ${kanit.variable} ${instrumentSerif.variable}`}
+      className={`${lexend.variable} ${instrumentSerif.variable}`}
     >
       <body className="min-h-screen antialiased">
         <ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
