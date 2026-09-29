@@ -32,7 +32,7 @@ export function ProjectCard({ project }: { project: Project }) {
           aria-hidden="true"
         />
       </h2>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{project.summary}</p>
+      <p className="mt-2 text-lg leading-relaxed text-muted-foreground">{project.summary}</p>
     </article>
   )
 }

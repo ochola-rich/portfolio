@@ -43,19 +43,19 @@ export function FeaturedProjects({ projects }: { projects: Project[] }) {
               </h3>
               <ArrowRight className="mt-1 size-5 shrink-0" aria-hidden="true" />
             </div>
-            <p className="mt-2 text-muted-foreground">{project.summary}</p>
+            <p className="mt-2 text-lg text-muted-foreground">{project.summary}</p>
             {project.highlights && project.highlights.length > 0 && (
               <dl className="mt-5 grid gap-4 sm:grid-cols-2">
                 {project.highlights.map((highlight) => (
                   <div key={highlight.id ?? highlight.value}>
                     <dt className="font-medium">{highlight.value}</dt>
-                    <dd className="mt-1 text-sm text-muted-foreground">{highlight.label}</dd>
+                    <dd className="mt-1 text-lg text-muted-foreground">{highlight.label}</dd>
                   </div>
                 ))}
               </dl>
             )}
             {project.stack && project.stack.length > 0 && (
-              <p className="mt-5 text-sm text-muted-foreground">
+              <p className="mt-5 text-lg text-muted-foreground">
                 Stack - {project.stack.join(', ')}
               </p>
             )}

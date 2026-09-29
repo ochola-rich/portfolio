@@ -53,7 +53,7 @@ export function Hero({ profile }: { profile: Profile }) {
             </span>
           ))}
         </h1>
-        <p className="mt-6 max-w-lg text-[15px] leading-relaxed text-muted-foreground">
+        <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted-foreground">
           {profile.intro}
         </p>
         <div className="mt-8 flex flex-wrap items-center gap-3">

@@ -48,7 +48,7 @@ export function PostCard({ post }: { post: Post }) {
           )}
         </p>
         <h3 className="mt-3 text-xl leading-snug font-medium">{post.title}</h3>
-        <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-3 line-clamp-3 text-lg leading-relaxed text-muted-foreground">
           {post.excerpt}
         </p>
         {post.tags && post.tags.length > 0 && (

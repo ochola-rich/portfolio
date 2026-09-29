@@ -43,14 +43,14 @@ export function Contact({ profile }: { profile: Profile }) {
         <RotatingBadge name={profile.name} />
       </div>
       {profile.contactBody && (
-        <p className="mt-6 leading-relaxed text-muted-foreground">{profile.contactBody}</p>
+        <p className="mt-6 text-lg leading-relaxed text-muted-foreground">{profile.contactBody}</p>
       )}
       <p className="mt-10 text-xl font-medium">
         Looking For Something <em className="font-accent font-normal">Unique?</em>
         <br />
         Feel Free To Share <em className="font-accent font-normal">Your Ideas!</em>
       </p>
-      <p className="mt-3 text-sm text-muted-foreground">
+      <p className="mt-3 text-lg text-muted-foreground">
         Tell me what you are building and how I can help turn it into working software.
       </p>
       <Button asChild size="lg" className="mt-4 w-full">

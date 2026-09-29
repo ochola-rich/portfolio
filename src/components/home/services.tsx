@@ -55,7 +55,7 @@ export function Services({ services, contactHref }: { services: Service[]; conta
             <h3 className="mt-5 text-xl font-medium">
               <AccentText text={service.title} />
             </h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            <p className="mt-2 text-lg leading-relaxed text-muted-foreground">
               {service.description}
             </p>
             {service.price && (

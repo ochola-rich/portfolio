@@ -15,7 +15,7 @@ export default async function ProjectsPage() {
   return (
     <Section className="px-4 py-16 sm:px-8" labelledBy="projects-heading">
       <SectionHeading id="projects-heading">Projects</SectionHeading>
-      <p className="mx-auto mt-4 max-w-xl text-center text-muted-foreground">
+      <p className="mx-auto mt-4 max-w-xl text-center text-lg text-muted-foreground">
         Things I have designed, built and shipped.
       </p>
       {projects.length === 0 ? (

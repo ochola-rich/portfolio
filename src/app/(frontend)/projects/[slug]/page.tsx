@@ -74,7 +74,7 @@ export default async function ProjectPage({ params }: Props) {
             {project.highlights.map((highlight) => (
               <div key={highlight.id ?? highlight.value}>
                 <dt className="font-display text-2xl font-medium">{highlight.value}</dt>
-                <dd className="mt-1 text-sm text-muted-foreground">{highlight.label}</dd>
+                <dd className="mt-1 text-lg text-muted-foreground">{highlight.label}</dd>
               </div>
             ))}
           </dl>
@@ -83,7 +83,7 @@ export default async function ProjectPage({ params }: Props) {
         {project.description && (
           <RichText
             data={project.description}
-            className="mt-10 space-y-4 leading-relaxed text-muted-foreground [&_h2]:mt-8 [&_h2]:font-display [&_h2]:text-2xl [&_h2]:text-foreground [&_li]:ml-5 [&_strong]:text-foreground [&_ul]:list-disc"
+            className="mt-10 space-y-4 text-lg leading-relaxed text-muted-foreground [&_h2]:mt-8 [&_h2]:font-display [&_h2]:text-2xl [&_h2]:text-foreground [&_li]:ml-5 [&_strong]:text-foreground [&_ul]:list-disc"
           />
         )}
 
