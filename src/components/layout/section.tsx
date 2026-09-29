@@ -2,41 +2,19 @@ import type { ReactNode } from 'react'
 
 import { cn } from '@/lib/utils'
 
-function Tick({ className }: { className: string }) {
-  return (
-    <span aria-hidden="true" className={cn('absolute size-3 border-foreground/60', className)} />
-  )
-}
-
-// A band of the framed page: a hairline top border with the crop-mark ticks
-// at both ends, as in the design reference.
 export function Section({
   id,
   children,
   className,
-  ticks = true,
   labelledBy,
 }: {
   id?: string
   children: ReactNode
   className?: string
-  ticks?: boolean
   labelledBy?: string
 }) {
   return (
-    <section
-      id={id}
-      aria-labelledby={labelledBy}
-      className={cn('relative scroll-mt-24 border-t border-border/70', className)}
-    >
-      {ticks && (
-        <>
-          <Tick className="-top-px -left-3 w-3 border-t" />
-          <Tick className="-top-1.5 -left-px h-3 border-l" />
-          <Tick className="-top-px -right-3 w-3 border-t" />
-          <Tick className="-top-1.5 -right-px h-3 border-r" />
-        </>
-      )}
+    <section id={id} aria-labelledby={labelledBy} className={cn('scroll-mt-24', className)}>
       {children}
     </section>
   )

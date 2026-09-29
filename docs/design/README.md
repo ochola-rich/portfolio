@@ -8,7 +8,7 @@
 | Element | Implementation |
 |---|---|
 | Floating pill nav with socials, theme toggle and "Book a Call" | `src/components/layout/site-nav.tsx` |
-| Framed page: hairline side borders, section dividers with crop-mark ticks | `src/components/layout/section.tsx` |
+| Framed page with hairline borders and crop-mark ticks | Dropped at the owner's request (2026-09-29); sections are separated by spacing only |
 | Hero: availability badge, large gradient headline, portrait with frosted vertical strips | `src/components/home/hero.tsx` |
 | Logo strip under the hero | Tech-stack marquee (`marquee` on `profile`) |
 | Featured projects as stacked, tinted, glowing cards | Sticky stack in `src/components/projects/featured-projects.tsx`; colour per project (`tint`) |

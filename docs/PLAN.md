@@ -48,7 +48,7 @@ docs/                    PLAN, ADRs, design reference
 0. **Scaffolding & governance** — Next.js + Payload + SQLite, Tailwind v4, shadcn/ui, AGENTS.md, ADRs, tooling. *(done)*
 1. **Design reference** — recorded in `docs/design/`; theme tokens and fonts set. *(done)*
 2. **Content model** — `projects`, `posts`, `services` collections, `profile` and `site-settings` globals, access rules, revalidation hooks, generated types, integration tests, seed script with the owner's real GitHub/dev.to content. *(done)*
-3. **Layout shell** — pill nav, framed layout, footer, theme toggle, SEO defaults, `sitemap.ts`, `robots.ts`. *(done)*
+3. **Layout shell** — pill nav, section layout, footer, theme toggle, SEO defaults, `sitemap.ts`, `robots.ts`. *(done)*
 4. **Home** — hero, marquee, featured project stack, story, services, latest posts, contact. *(done)*
 5. **Portfolio showcase** — `/projects` grid and `/projects/[slug]` detail page. *(done; tag filter still open)*
 6. **Blog** — `/blog` snippet cards with tag filter; "Read more" opens the external article in a new tab. *(done)*

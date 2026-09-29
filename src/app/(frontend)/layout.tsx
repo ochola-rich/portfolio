@@ -54,7 +54,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           </a>
           <SiteNav profile={profile} />
           <main id="main" className="mx-auto w-full max-w-7xl px-3 pt-24 sm:px-5">
-            <div className="border-x border-border/70">{children}</div>
+            {children}
           </main>
           <SiteFooter profile={profile} settings={settings} />
         </ThemeProvider>

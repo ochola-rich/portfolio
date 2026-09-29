@@ -13,7 +13,7 @@ export default async function ProjectsPage() {
   const projects = await getProjects()
 
   return (
-    <Section ticks={false} className="border-t-0 px-4 py-16 sm:px-8" labelledBy="projects-heading">
+    <Section className="px-4 py-16 sm:px-8" labelledBy="projects-heading">
       <SectionHeading id="projects-heading">Projects</SectionHeading>
       <p className="mx-auto mt-4 max-w-xl text-center text-muted-foreground">
         Things I have designed, built and shipped.

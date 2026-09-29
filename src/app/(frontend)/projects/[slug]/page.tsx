@@ -31,7 +31,7 @@ export default async function ProjectPage({ params }: Props) {
   if (!project) notFound()
 
   return (
-    <Section ticks={false} className="border-t-0 px-4 py-12 sm:px-8">
+    <Section className="px-4 py-12 sm:px-8">
       <article className="mx-auto max-w-4xl">
         <Link
           href="/projects"

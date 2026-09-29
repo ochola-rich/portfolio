@@ -25,7 +25,7 @@ export default async function BlogPage({ searchParams }: Props) {
     )
 
   return (
-    <Section ticks={false} className="border-t-0 px-4 py-16 sm:px-8" labelledBy="blog-heading">
+    <Section className="px-4 py-16 sm:px-8" labelledBy="blog-heading">
       <SectionHeading id="blog-heading">Blog</SectionHeading>
       <p className="mx-auto mt-4 max-w-xl text-center text-muted-foreground">
         Snippets of what I write. Each article opens on the platform where it is published.

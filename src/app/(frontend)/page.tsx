@@ -24,7 +24,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <Section ticks={false} className="border-t-0">
+      <Section>
         <Hero profile={profile} />
       </Section>
 
