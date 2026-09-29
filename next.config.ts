@@ -7,6 +7,13 @@ const __filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(__filename)
 
 const nextConfig: NextConfig = {
+  // Next blocks dev scripts for any host other than localhost. The Payload
+  // admin renders entirely client-side, so it is blank without them when the
+  // dev server is opened by LAN IP (e.g. from a phone).
+  allowedDevOrigins: (process.env.DEV_ALLOWED_ORIGINS ?? '')
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean),
   images: {
     localPatterns: [
       {
