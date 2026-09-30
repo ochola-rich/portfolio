@@ -1,5 +1,6 @@
-import { sqliteAdapter } from '@payloadcms/db-sqlite'
+import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
@@ -30,11 +31,23 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-  db: sqliteAdapter({
-    client: {
-      url: process.env.DATABASE_URL || '',
+  db: postgresAdapter({
+    pool: {
+      connectionString: process.env.DATABASE_URL || '',
     },
+    // Production schema changes go through migrations (see ADR-0006).
+    migrationDir: path.resolve(dirname, 'migrations'),
   }),
   sharp,
-  plugins: [],
+  plugins: [
+    // Serverless functions have no persistent disk, so uploads go to Vercel
+    // Blob when a token is present; local development keeps files on disk.
+    vercelBlobStorage({
+      enabled: Boolean(process.env.BLOB_READ_WRITE_TOKEN),
+      collections: { media: true },
+      token: process.env.BLOB_READ_WRITE_TOKEN,
+      // Vercel caps request bodies at 4.5 MB, so the browser uploads directly.
+      clientUploads: true,
+    }),
+  ],
 })
