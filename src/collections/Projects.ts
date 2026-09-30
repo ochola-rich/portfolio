@@ -74,7 +74,13 @@ export const Projects: CollectionConfig = {
       type: 'row',
       fields: [
         urlField({ name: 'repoUrl', label: 'Repository URL' }),
-        urlField({ name: 'liveUrl', label: 'Live URL' }),
+        urlField({
+          name: 'liveUrl',
+          label: 'Live URL',
+          admin: {
+            description: 'Optional. When set, a "Live preview" button appears on the project.',
+          },
+        }),
       ],
     },
     {

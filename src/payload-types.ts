@@ -180,6 +180,9 @@ export interface Project {
     [k: string]: unknown;
   } | null;
   repoUrl?: string | null;
+  /**
+   * Optional. When set, a "Live preview" button appears on the project.
+   */
   liveUrl?: string | null;
   /**
    * Card colour in the featured stack.

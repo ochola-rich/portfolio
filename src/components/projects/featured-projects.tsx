@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import type { Project } from '@/payload-types'
 
+import { LivePreviewLink } from './live-preview-link'
 import { ProjectCover } from './project-cover'
 import { tintClasses } from './tints'
 
@@ -58,6 +59,9 @@ export function FeaturedProjects({ projects }: { projects: Project[] }) {
               <p className="mt-5 text-lg text-muted-foreground">
                 Stack - {project.stack.join(', ')}
               </p>
+            )}
+            {project.liveUrl && (
+              <LivePreviewLink url={project.liveUrl} title={project.title} className="mt-5" />
             )}
             {project.cover && <ProjectCover project={project} className="mt-5" />}
           </article>

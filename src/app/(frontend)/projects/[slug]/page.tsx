@@ -1,13 +1,15 @@
 import { RichText } from '@payloadcms/richtext-lexical/react'
-import { ArrowLeft, ArrowUpRight } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 import { Section } from '@/components/layout/section'
+import { LivePreviewLink } from '@/components/projects/live-preview-link'
 import { ProjectCover } from '@/components/projects/project-cover'
 import { ExternalLink } from '@/components/shared/external-link'
 import { platformLabels, SocialIcon } from '@/components/shared/social-icon'
+import { Button } from '@/components/ui/button'
 import { getProjectBySlug, getProjects } from '@/lib/cms'
 
 type Props = { params: Promise<{ slug: string }> }
@@ -22,9 +24,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!project) return {}
   return { title: project.title, description: project.summary }
 }
-
-const buttonClass =
-  'inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none'
 
 export default async function ProjectPage({ params }: Props) {
   const project = await getProjectBySlug((await params).slug)
@@ -49,21 +48,15 @@ export default async function ProjectPage({ params }: Props) {
 
         <div className="mt-6 flex flex-wrap gap-3">
           {project.liveUrl && (
-            <ExternalLink
-              href={project.liveUrl}
-              className={`${buttonClass} bg-primary text-primary-foreground hover:opacity-90`}
-            >
-              Visit live site <ArrowUpRight className="size-4" aria-hidden="true" />
-            </ExternalLink>
+            <LivePreviewLink url={project.liveUrl} title={project.title} size="lg" />
           )}
           {project.repoUrl && (
-            <ExternalLink
-              href={project.repoUrl}
-              className={`${buttonClass} border border-border hover:bg-muted`}
-            >
-              <SocialIcon platform="github" className="size-4" /> View source
-              <span className="sr-only">on {platformLabels.github}</span>
-            </ExternalLink>
+            <Button asChild size="lg" variant="outline">
+              <ExternalLink href={project.repoUrl}>
+                <SocialIcon platform="github" className="size-4" /> View source
+                <span className="sr-only">on {platformLabels.github}</span>
+              </ExternalLink>
+            </Button>
           )}
         </div>
 

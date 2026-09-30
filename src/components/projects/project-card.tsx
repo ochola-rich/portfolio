@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import type { Project } from '@/payload-types'
 
+import { LivePreviewLink } from './live-preview-link'
 import { ProjectCover } from './project-cover'
 import { tintClasses } from './tints'
 
@@ -33,6 +34,9 @@ export function ProjectCard({ project }: { project: Project }) {
         />
       </h2>
       <p className="mt-2 text-lg leading-relaxed text-muted-foreground">{project.summary}</p>
+      {project.liveUrl && (
+        <LivePreviewLink url={project.liveUrl} title={project.title} size="sm" className="mt-4" />
+      )}
     </article>
   )
 }
