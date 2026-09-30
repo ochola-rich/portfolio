@@ -44,6 +44,9 @@ export default buildConfig({
     // Blob when a token is present; local development keeps files on disk.
     vercelBlobStorage({
       enabled: Boolean(process.env.BLOB_READ_WRITE_TOKEN),
+      // Keep the media schema identical with and without a token so local
+      // migrations match production.
+      alwaysInsertFields: true,
       collections: { media: true },
       token: process.env.BLOB_READ_WRITE_TOKEN,
       // Vercel caps request bodies at 4.5 MB, so the browser uploads directly.
