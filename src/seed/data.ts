@@ -39,7 +39,7 @@ export const profile = {
     { platform: 'linkedin', url: 'https://www.linkedin.com/in/richard-ochola/' },
     { platform: 'devto', url: 'https://dev.to/ochola' },
     { platform: 'x', url: 'https://x.com/ochola_rich' },
-    { platform: 'youtube', url: 'https://www.youtube.com/@ochola-rich' },
+    { platform: 'youtube', url: 'https://www.youtube.com/@Mrblaqke' },
   ],
 } as const
 
