@@ -61,18 +61,43 @@ async function seed() {
   payload.logger.info('Seeded profile and site settings')
 
   for (const project of data.projects) {
-    if (await exists(payload, 'projects', 'title', project.title)) continue
     // GitHub's generated social preview gives every project a real cover to start with.
     const repo = new URL(project.repoUrl).pathname
-    const cover = await uploadFromUrl(
-      payload,
-      `https://opengraph.githubassets.com/seed${repo}`,
-      `GitHub preview card for ${project.title}`,
-      `${slugify(project.title)}-cover`,
-    ).catch((error: Error) => {
-      payload.logger.warn(`No cover for ${project.title}: ${error.message}`)
-      return null
+    const uploadCover = () =>
+      uploadFromUrl(
+        payload,
+        `https://opengraph.githubassets.com/seed${repo}`,
+        `GitHub preview card for ${project.title}`,
+        `${slugify(project.title)}-cover`,
+      ).catch((error: Error) => {
+        payload.logger.warn(`No cover for ${project.title}: ${error.message}`)
+        return null
+      })
+
+    const { docs: existing } = await payload.find({
+      collection: 'projects',
+      where: { title: { equals: project.title } },
+      limit: 1,
+      depth: 0,
     })
+    if (existing[0]) {
+      // Backfill a cover if an earlier run created the project without one.
+      if (!existing[0].cover) {
+        const cover = await uploadCover()
+        if (cover) {
+          await payload.update({
+            collection: 'projects',
+            id: existing[0].id,
+            data: { cover: cover.id },
+            context,
+          })
+          payload.logger.info(`Added cover to project: ${project.title}`)
+        }
+      }
+      continue
+    }
+
+    const cover = await uploadCover()
     await payload.create({
       collection: 'projects',
       data: {
