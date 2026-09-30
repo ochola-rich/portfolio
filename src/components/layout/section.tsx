@@ -24,7 +24,7 @@ export function SectionHeading({ id, children }: { id: string; children: ReactNo
   return (
     <h2
       id={id}
-      className="text-gradient text-center font-display text-3xl font-medium tracking-tight sm:text-4xl"
+      className="text-gradient text-center font-display text-[2rem] leading-tight font-medium tracking-tight"
     >
       {children}
     </h2>

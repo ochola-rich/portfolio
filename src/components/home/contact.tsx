@@ -32,7 +32,7 @@ export function Contact({ profile }: { profile: Profile }) {
       <div className="flex items-start justify-between gap-6">
         <h2
           id="contact-heading"
-          className="text-gradient font-display text-3xl leading-tight font-medium tracking-tight sm:text-4xl"
+          className="text-gradient font-display text-[2rem] leading-tight font-medium tracking-tight"
         >
           {heading.map((line, i) => (
             <span key={i} className="block">

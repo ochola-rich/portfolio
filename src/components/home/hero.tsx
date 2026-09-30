@@ -46,7 +46,7 @@ export function Hero({ profile }: { profile: Profile }) {
             {profile.availabilityLabel}
           </p>
         )}
-        <h1 className="text-gradient mt-6 font-display text-4xl leading-[1.15] font-medium tracking-tight sm:text-5xl md:w-[120%] lg:text-[3.4rem]">
+        <h1 className="text-gradient mt-6 font-display text-4xl leading-[1.15] font-medium tracking-tight sm:text-5xl md:w-[120%] lg:text-6xl">
           {headlineLines.map((line, i) => (
             <span key={i} className="block">
               {line}
