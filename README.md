@@ -5,11 +5,13 @@ Personal portfolio built with Next.js, shadcn/ui and Payload CMS. Projects, blog
 ## Stack
 - Next.js 16 (App Router, TypeScript)
 - Tailwind CSS v4 + shadcn/ui
-- Payload CMS 3 (admin at `/admin`), SQLite for local development
+- Payload CMS 3 (admin at `/admin`) on Postgres: Docker locally, Neon in production
+- Deployed on Vercel; media on Vercel Blob
 
 ## Getting started
 ```bash
 cp .env.example .env   # then set PAYLOAD_SECRET to a long random string
+docker compose up -d   # local Postgres
 npm install
 npm run seed           # optional: load the initial profile, projects, services and posts
 npm run dev
@@ -27,6 +29,8 @@ npm run dev
 | `npm run test:int` | Vitest integration tests |
 | `npm run test:e2e` | Playwright end-to-end tests |
 | `npm run seed` | load initial content (skips documents that already exist) |
+| `npm run migrate:create <name>` | create a migration after a schema change (commit it) |
+| `npm run migrate` | apply pending migrations |
 | `npm run generate:types` | regenerate `src/payload-types.ts` after schema changes |
 
 ## Editing content
@@ -38,6 +42,13 @@ Everything on the site comes from `/admin`:
 - **Services**: grouped into tabs by *Category*; wrap words in `*asterisks*` for the italic accent
 
 Only documents with status *Published* are visible on the site.
+
+## Deployment (Vercel)
+Pushes to `main` on GitHub deploy through Vercel. The build runs `npm run ci`, which applies migrations and then builds.
+
+Environment variables on Vercel: `DATABASE_URL` (set by the Neon integration), `PAYLOAD_SECRET`, `BLOB_READ_WRITE_TOKEN` (set when a Blob store is connected), `NEXT_PUBLIC_SITE_URL`.
+
+To load initial content into production, run the seed once with the production `DATABASE_URL` and `BLOB_READ_WRITE_TOKEN` in the environment.
 
 ## Docs
 - `AGENTS.md` — rules for contributors and AI agents

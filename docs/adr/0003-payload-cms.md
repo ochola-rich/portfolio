@@ -1,6 +1,6 @@
 # ADR-0003: Payload CMS embedded in the Next.js app
 
-- Status: Accepted
+- Status: Accepted (database and media storage amended by ADR-0006)
 - Date: 2026-09-29
 
 ## Context

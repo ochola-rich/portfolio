@@ -3,7 +3,7 @@
 These rules bind every AI agent (and human) that touches this repository. Read this file, `docs/PLAN.md` and `docs/adr/` before making changes.
 
 ## 1. Project in one paragraph
-A personal portfolio site built with Next.js (App Router) and shadcn/ui, with Payload CMS embedded in the same app so all content is edited from `/admin`. Public sections: hero/about, a **portfolio showcase** of projects, and a **blog** that lists post snippets whose "Read more" links out to the full article on an external platform (dev.to, Hashnode, Medium, …). Blog posts are not hosted here. Content lives in SQLite locally. See `docs/PLAN.md`.
+A personal portfolio site built with Next.js (App Router) and shadcn/ui, with Payload CMS embedded in the same app so all content is edited from `/admin`. Public sections: hero/about, a **portfolio showcase** of projects, and a **blog** that lists post snippets whose "Read more" links out to the full article on an external platform (dev.to, Hashnode, Medium, …). Blog posts are not hosted here. Content lives in Postgres (Docker locally, Neon in production) with media on Vercel Blob in production (ADR-0006). See `docs/PLAN.md`.
 
 ## 2. Ground rules
 1. **Follow the ADRs.** Architecture decisions live in `docs/adr/`. Do not contradict one silently; write a new ADR that supersedes it.
@@ -44,9 +44,9 @@ A personal portfolio site built with Next.js (App Router) and shadcn/ui, with Pa
 - If a diff mixes concerns, split it with `git add -p` into separate commits. If a commit message needs "and", it is probably two commits.
 - **Atomic commits**: one logical change per commit; the repo type-checks, lints and builds at every commit.
 - A test for a change may go in the same commit as the change or in an immediately following `test` commit; docs updates go with the change they describe.
-- Schema changes to Payload collections go with the regenerated `src/payload-types.ts` (`npm run generate:types`) and, when admin components change, the regenerated import map (`npm run generate:importmap`) in the same commit.
+- Schema changes to Payload collections go with the regenerated `src/payload-types.ts` (`npm run generate:types`), a new migration (`npm run migrate:create`) and, when admin components change, the regenerated import map (`npm run generate:importmap`) in the same commit.
 - **Never push code unless the owner explicitly asks you to.** Commit locally as you work; pushing (any branch, including feature branches), opening PRs and merging are done only on explicit request. A previous approval to push does not carry over to later pushes.
-- Never commit `.env`, `node_modules`, `.next`, the SQLite database (`*.db`), uploaded media (`/media`) or other generated artifacts.
+- Never commit `.env`, `node_modules`, `.next`, database files (`*.db`), uploaded media (`/media`) or other generated artifacts.
 - No `git push --force` to shared branches, no `--no-verify`, no history rewrite of pushed commits, no `git add -A` without reviewing `git status`/`git diff --staged`.
 
 ### Branching

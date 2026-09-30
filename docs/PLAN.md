@@ -8,10 +8,10 @@ A professional personal portfolio whose content is fully managed from a CMS: an 
 Browser                      Next.js app (single deployment)                 Storage
 ┌──────────────────┐  HTML   ┌───────────────────────────────────────────┐   ┌─────────┐
 │ /  hero, about   │ ◀────── │ src/app/(frontend)  Server Components     │   │ SQLite  │
-│ /projects        │         │   └─ src/lib/cms/*  (Payload Local API) ──┼──▶│ content │
+│ /projects        │         │   └─ src/lib/cms/*  (Payload Local API) ──┼──▶│ Postgres│
 │ /projects/[slug] │         │                                           │   └─────────┘
 │ /blog            │─ Read more ─▶ dev.to / Hashnode / Medium (external)  │   ┌─────────┐
-│                  │         │ src/app/(payload)   /admin, /api  ────────┼──▶│ /media  │
+│                  │         │ src/app/(payload)   /admin, /api  ────────┼──▶│ Blob    │
 │ /admin (owner)   │ ◀─────▶ │   collections · globals · hooks           │   └─────────┘
 └──────────────────┘         └───────────────────────────────────────────┘
 ```
@@ -45,7 +45,7 @@ docs/                    PLAN, ADRs, design reference
 ```
 
 ## Phases (in order; each ends with atomic commits)
-0. **Scaffolding & governance** — Next.js + Payload + SQLite, Tailwind v4, shadcn/ui, AGENTS.md, ADRs, tooling. *(done)*
+0. **Scaffolding & governance** — Next.js + Payload, Tailwind v4, shadcn/ui, AGENTS.md, ADRs, tooling. *(done)*
 1. **Design reference** — recorded in `docs/design/`; theme tokens and fonts set. *(done)*
 2. **Content model** — `projects`, `posts`, `services` collections, `profile` and `site-settings` globals, access rules, revalidation hooks, generated types, integration tests, seed script with the owner's real GitHub/dev.to content. *(done)*
 3. **Layout shell** — pill nav, section layout, footer, theme toggle, SEO defaults, `sitemap.ts`, `robots.ts`. *(done)*
@@ -53,5 +53,5 @@ docs/                    PLAN, ADRs, design reference
 5. **Portfolio showcase** — `/projects` grid and `/projects/[slug]` detail page. *(done; tag filter still open)*
 6. **Blog** — `/blog` snippet cards with tag filter; "Read more" opens the external article in a new tab. *(done)*
 7. **Polish** — loading/empty/error states, accessibility pass, image optimisation, Lighthouse run (real numbers in README).
-8. **Deployment** — choose host and production database (ADR), env docs, README.
+8. **Deployment** — Vercel + Neon Postgres + Vercel Blob (ADR-0006), migrations, env docs, README.
 9. **Bonus (optional, ask first)** — import posts from the dev.to API, contact form, analytics, admin live preview. LinkedIn posts cannot be fetched automatically (no public read API for member posts); they are added by URL in the admin.
