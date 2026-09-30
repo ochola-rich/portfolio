@@ -5,8 +5,11 @@ import { slugify } from '../fields/slug'
 
 import * as data from './data'
 
-// Seeding runs outside Next.js, so skip the revalidation hooks.
-const context = { disableRevalidate: true }
+// Seeding runs outside Next.js, so skip the revalidation hooks. Each call
+// needs its own object: Payload uses it as req.context, and the Blob storage
+// plugin leaves `skipCloudStorage` on it after an upload, which would make
+// every later upload in a shared context silently skip storage.
+const context = () => ({ disableRevalidate: true })
 
 async function download(url: string, attempts = 4): Promise<Response> {
   for (let attempt = 1; ; attempt++) {
@@ -31,7 +34,7 @@ async function uploadFromUrl(payload: Payload, url: string, alt: string, filenam
     collection: 'media',
     data: { alt },
     file: { data: buffer, mimetype, name: `${filename}.${extension}`, size: buffer.length },
-    context,
+    context: context(),
   })
 }
 
@@ -55,9 +58,9 @@ async function seed() {
       marquee: [...data.profile.marquee],
       socials: data.profile.socials.map((s) => ({ ...s })),
     },
-    context,
+    context: context(),
   })
-  await payload.updateGlobal({ slug: 'site-settings', data: data.siteSettings, context })
+  await payload.updateGlobal({ slug: 'site-settings', data: data.siteSettings, context: context() })
   payload.logger.info('Seeded profile and site settings')
 
   for (const project of data.projects) {
@@ -89,7 +92,7 @@ async function seed() {
             collection: 'projects',
             id: existing[0].id,
             data: { cover: cover.id },
-            context,
+            context: context(),
           })
           payload.logger.info(`Added cover to project: ${project.title}`)
         }
@@ -108,7 +111,7 @@ async function seed() {
         cover: cover?.id,
         status: 'published',
       },
-      context,
+      context: context(),
     })
     payload.logger.info(`Seeded project: ${project.title}`)
   }
@@ -118,7 +121,7 @@ async function seed() {
     await payload.create({
       collection: 'services',
       data: { ...service, features: [...service.features], status: 'published' },
-      context,
+      context: context(),
     })
     payload.logger.info(`Seeded service: ${service.title}`)
   }
@@ -134,7 +137,7 @@ async function seed() {
     await payload.create({
       collection: 'posts',
       data: { ...post, tags: [...post.tags], cover: cover.id, status: 'published' },
-      context,
+      context: context(),
     })
     payload.logger.info(`Seeded post: ${post.title}`)
   }
