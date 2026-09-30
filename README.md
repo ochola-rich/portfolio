@@ -48,7 +48,14 @@ Pushes to `main` on GitHub deploy through Vercel. The build runs `npm run ci`, w
 
 Environment variables on Vercel: `DATABASE_URL` (set by the Neon integration), `PAYLOAD_SECRET`, `BLOB_READ_WRITE_TOKEN` (set when a Blob store is connected), `NEXT_PUBLIC_SITE_URL`.
 
-To load initial content into production, run the seed once with the production `DATABASE_URL` and `BLOB_READ_WRITE_TOKEN` in the environment.
+To load initial content into production, pull the production variables (`npx vercel env pull <file> --environment production`, kept outside the repo) and run the seed with them:
+
+```bash
+set -a; . <file>; set +a
+DATABASE_URL="$DATABASE_URL_UNPOOLED" NODE_ENV=production npx payload run src/seed/index.ts
+```
+
+`NODE_ENV=production` stops Payload from pushing schema changes directly; production schema only changes through migrations. **The seed overwrites the Profile and Site Settings globals**, so don't rerun it once you have edited those in `/admin`. Projects, posts and services that already exist are left alone.
 
 ## Docs
 - `AGENTS.md` — rules for contributors and AI agents
